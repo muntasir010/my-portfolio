@@ -5,7 +5,7 @@
 body {
   background: radial-gradient(circle at top, #0f172a, #020617);
   color: white;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 html {
   scroll-behavior: smooth;

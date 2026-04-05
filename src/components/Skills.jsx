@@ -1,47 +1,57 @@
 /* eslint-disable no-unused-vars */
 import { motion } from "framer-motion";
+import html from "../assets/skill/icons8-html-5.svg";
+import css from "../assets/skill/icons8-css3.svg";
+import tailwind from "../assets/skill/icons8-tailwind-css.svg";
+import react from "../assets/skill/React-icon.svg";
+import next from "../assets/skill/icons8-nextjs.svg";
+import javascript from "../assets/skill/icons8-javascript.svg";
+import typescript from "../assets/skill/icons8-typescript.svg";
 
 const skillCategories = [
   {
     title: "Frontend",
-    average: 83,
     skills: [
-      { name: "HTML", level: 90 },
-      { name: "CSS", level: 85 },
-      { name: "Tailwind CSS", level: 87 },
-      { name: "JavaScript", level: 80 },
-      { name: "React", level: 86 },
-      { name: "Next", level: 70 },
+      { name: "HTML", icon: html },
+      { name: "CSS", icon: css },
+      { name: "Tailwind CSS", icon: tailwind },
+      { name: "JavaScript", icon: javascript },
+      { name: "TypeScript", icon: typescript },
+      { name: "React", icon: react },
+      { name: "Next", icon: next },
     ],
   },
   {
     title: "Backend",
-    average: 76,
     skills: [
-      { name: "Node.js", level: 70 },
-      { name: "Express.js", level: 75 },
-      { name: "MongoDB", level: 80 },
-      { name: "PostgreSQL", level: 78 },
-      { name: "Prisma", level: 70 },
-      { name: "Firebase", level: 83 },
+      { name: "Node.js", icon: "https://skillicons.dev/icons?i=nodejs" },
+      { name: "Express.js", icon: "https://skillicons.dev/icons?i=express" },
+      { name: "MongoDB", icon: "https://skillicons.dev/icons?i=mongodb" },
+      { name: "PostgreSQL", icon: "https://skillicons.dev/icons?i=postgresql" },
+      { name: "Prisma", icon: "https://skillicons.dev/icons?i=prisma" },
+      { name: "Mongoose", icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/mongoose/mongoose-original.svg" },
+      { name: "JWT", icon: "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/jsonwebtokens.svg" },
     ],
   },
   {
     title: "Tools",
-    average: 90,
     skills: [
-      { name: "Github", level: 85 },
-      { name: "VS Code", level: 95 },
-      { name: "Figma", level: 90 },
+      { name: "Git", icon: "https://skillicons.dev/icons?i=git" },
+      { name: "Github", icon: "https://skillicons.dev/icons?i=github" },
+      { name: "VS Code", icon: "https://skillicons.dev/icons?i=vscode" },
+      { name: "Figma", icon: "https://skillicons.dev/icons?i=figma" },
+      { name: "Vercel", icon: "https://skillicons.dev/icons?i=vercel" },
+      { name: "Render", icon: "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/render.svg" },
     ],
   },
 ];
 
-
-
 const Skills = () => {
   return (
-    <section id="skills" className="mx-auto mt-10 md:mt-20 w-full max-w-6xl text-white">
+    <section
+      id="skills"
+      className="mx-auto mt-10 md:mt-20 w-full max-w-6xl text-white px-4"
+    >
       <h2 className="mb-12 text-center text-3xl font-bold tracking-tight">
         Technical <span className="text-neon shadow-neon">Skills</span>
       </h2>
@@ -52,55 +62,64 @@ const Skills = () => {
             key={idx}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: idx * 0.2 }}
+            transition={{ delay: idx * 0.1 }}
             viewport={{ once: true }}
             className="relative flex flex-col rounded-3xl border border-white/10 bg-glass p-7 backdrop-blur-xl shadow-2xl shadow-black/50 overflow-hidden"
           >
-            {/* Category Header with Circular Progress */}
-            <div className="flex items-center justify-between mb-8">
-              <div>
-                <h3 className="text-xl font-bold text-white/90">{category.title}</h3>
-                <p className="text-[10px] uppercase tracking-widest text-white/40">Expertise</p>
-              </div>
-              
-              {/* Circular Progress Bar */}
-              <div className="relative flex items-center justify-center w-14 h-14">
-                <svg className="w-full h-full -rotate-90">
-                  <circle cx="28" cy="28" r="24" stroke="currentColor" strokeWidth="4" fill="transparent" className="text-white/5" />
-                  <motion.circle
-                    cx="28" cy="28" r="24" stroke="currentColor" strokeWidth="4" fill="transparent"
-                    strokeDasharray="150"
-                    initial={{ strokeDashoffset: 150 }}
-                    whileInView={{ strokeDashoffset: 150 - (150 * category.average) / 100 }}
-                    className="text-neon drop-shadow-[0_0_8px_#00f3ff]"
-                  />
-                </svg>
-                <span className="absolute text-xs font-bold text-neon">{category.average}%</span>
-              </div>
+            {/* Header */}
+            <div className="mb-8">
+              <h3 className="text-xl font-bold text-white/90">
+                {category.title}
+              </h3>
+              <div className="h-1 w-12 bg-neon mt-2 rounded-full shadow-[0_0_8px_#00f3ff]" />
             </div>
 
             {/* Skills List */}
             <div className="space-y-6 flex-grow">
-              {category.skills.map((skill) => (
-                <div key={skill.name}>
-                  <div className="flex justify-between text-xs mb-2 text-white/70 font-medium tracking-wide">
-                    <span>{skill.name}</span>
-                    <span>{skill.level}%</span>
-                  </div>
-                  {/* Subtle Progress Line */}
-                  <div className="h-[3px] w-full rounded-full bg-white/5">
+              {category.skills.map((skill, sIdx) => (
+                <div key={skill.name} className="flex items-center group">
+                  {/* Left: Text */}
+                  <span className="text-sm font-medium text-white/70 group-hover:text-white transition-colors flex-shrink-0 w-24">
+                    {skill.name}
+                  </span>
+
+                  {/* Middle: Animated Connecting Line */}
+                  <div className="flex-grow mx-4 relative h-[1px] bg-white/10 overflow-hidden">
                     <motion.div
-                      initial={{ width: 0 }}
-                      whileInView={{ width: `${skill.level}%` }}
-                      transition={{ duration: 1, delay: 0.5 }}
-                      className="h-full rounded-full bg-gradient-to-r from-neon/40 to-neon shadow-[0_0_10px_rgba(0,243,255,0.4)]"
+                      initial={{ scaleX: 0, originX: 0 }}
+                      whileInView={{ scaleX: 1 }}
+                      transition={{ duration: 1, delay: sIdx * 0.1 }}
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-neon to-transparent"
                     />
+                    {/* Scanning Glow Effect */}
+                    <motion.div
+                      animate={{ x: ["-100%", "100%"] }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "linear",
+                      }}
+                      className="absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                    />
+                  </div>
+
+                  {/* Right: Icon */}
+                  <div className="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-full border border-white/5 bg-white/5 group-hover:border-neon group-hover:shadow-[0_0_10px_#00f3ff] transition-all duration-300 overflow-hidden">
+                    {skill.icon ? (
+                      <img
+                        src={skill.icon}
+                        alt={skill.name}
+                        className="w-10 h-10 object-contain p-1"
+                      />
+                    ) : (
+                      <span className="text-[8px] text-white/30 uppercase">
+                        None
+                      </span>
+                    )}
                   </div>
                 </div>
               ))}
             </div>
-
-            
           </motion.div>
         ))}
       </div>
